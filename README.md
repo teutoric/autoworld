@@ -8,6 +8,7 @@ In deze tekst zijn per class de belangrijkste eigenschappen opgesomd. In de bijh
 kunnen nog methods staan die je zal moeten implementeren om het geheel te laten werken. Die namen 
 van die methods, hun parameters, de volgorde van de parameters haal je uit de voorbeelden in de test 
 classes.
+
 ---------------------------
 Nummerplaat
 
@@ -18,6 +19,7 @@ Voorzie een getPlaat().
 Voorzie een toString, een equals en een hashCode.
 Zorg ervoor dat nummerplaten in een OutputStream kunnen bewaard worden.
 Implementeer de interface Comparable.
+
 ---------------------------
 DIV
 
@@ -70,13 +72,13 @@ Voertuig
 
 Plaats de class in be.vdab.voertuigen.
 De class heeft de volgende fields:
-  nummerplaat, class Nummerplaat. Het field nummerplaat wordt bij declaratie onmiddellijk een 
+- nummerplaat, class Nummerplaat. Het field nummerplaat wordt bij declaratie onmiddellijk een 
 waarde gegeven en kan later niet meer worden gewijzigd (Systeem van NL, een nummerplaat 
 wordt toegekend aan een voertuig en niet aan de eigenaar).
-  Merk, een String
-  DatumEersteIngebruikname, een Datum
-  Aankoopprijs, een int.
-  Zitplaatsen, een final int.
+-  Merk, een String
+-  DatumEersteIngebruikname, een Datum
+-  Aankoopprijs, een int.
+-  Zitplaatsen, een final int.
 
 ---------------------------
 De class is abstract.
