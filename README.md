@@ -9,6 +9,7 @@ kunnen nog methods staan die je zal moeten implementeren om het geheel te laten 
 van die methods, hun parameters, de volgorde van de parameters haal je uit de voorbeelden in de test 
 classes.
 
+Have fun with IT!
 ---------------------------
 Nummerplaat
 
@@ -41,8 +42,8 @@ Datum
 
 Maak een immutable class Datum.
 Plaats de class in be.vdab.util
-De class heeft 3 integer fields: dag, maand, jaar. Zorg ervoor deze fields slechts één maal een waarde 
-kunnen krijgen (onmiddellijk bij de declaratie of in de constructor).
+De class heeft 3 integer fields: dag, maand, jaar.
+org ervoor deze fields slechts één maal een waarde kunnen krijgen (onmiddellijk bij de declaratie of in de constructor).
 De class aanvaardt alleen geldige datums tussen 01/01/1583 en 31/12/4099. 
 Een poging om een foute datum te creëren leidt tot een DatumExcepetion.
 De constructor aanvaart 3 integers (dag, maand, jaar).
@@ -57,11 +58,17 @@ DatumException
 De class is afgeleid van Exception en heeft 4 constructors, net zoals Exception.
 Verder zijn er geen methods nodig.
 Plaats de class in be.vdab.util
+
+---------------------------
 Rijbewijs
-De class zit in het package be.vdab.util.mens
+
+De enumeratie zit in het package be.vdab.util.mens
 Mogelijke waarden: A, B, C, D, BE, CE, DE
-Bij het omzetten naar een string wordt BE, CE en De getoond met een + teken tussen de twee letters.
+Bij het omzetten naar een string wordt BE, CE en DE getoond met een + teken tussen de twee letters.
+
+---------------------------
 Mens
+
 De class zit in het package be.vdab.util.mens
 De class heeft de volgende fields:
 - de string naam.
@@ -80,26 +87,28 @@ wordt toegekend aan een voertuig en niet aan de eigenaar).
 -  Aankoopprijs, een int.
 -  Zitplaatsen, een final int.
 
----------------------------
 De class is abstract.
-
 De eerste vijf parameters van de constructor van Voertuig zijn: een merk, een datum van eerste 
 ingebruikname en een aankoopprijs, aantal zitplaatsen en een Mens. 
 Er kan eventueel ook een zesde, zevende,… n-tigste parameter zijn. Dit is telkens een Mens.
 De eerste Mens uit de lijst van de parameters is de bestuurder van het voertuig. De andere (de 
-optionele parameters) zijn inzittenden. Wanneer er teveel inzittenden zouden zijn dan ontstaat de 
-MensException, die in hetzelfde package als Mens zit.
+optionele parameters) zijn inzittenden.
+Wanneer er teveel inzittenden zouden zijn dan ontstaat de MensException, die in hetzelfde package als Mens zit.
 Als je de lijst van ingezetenen opvraagt, zit de bestuurder bij in deze lijst.
 Er kunnen niet meer ingezetenen zijn dan er zitplaatsen zijn in een voertuig.
 De bestuurder moet een geschikt rijbewijs hebben voor het voertuig.
-Er moeten inzittenden kunnen uitstappen en bij instappen. Er moet een andere bestuurder kunnen 
-plaats nemen. Een voertuig moet steeds een bestuurder hebben. Elk voertuig heeft minstens één 
-inzittende, anders krijg ontstaat er een IllegalArgumentException.
+De bestuurder maakt deel uit van de inzittenden.
+Een voertuig heeft ALTIJD één bestuurder.
+Momenteel kunnen inzittenden niet uitstappen.
+Als een nieuwe bestuurder instapt, schuift de huidige bestuurder door naar de gewone inzittenden.
+Elk voertuig heeft dus minstens één inzittende (de bestuuder), anders ontstaat er een IllegalArgumentException.
+
 Voorzie de nodige setters en getters.
 Voorzie een toString, equals en HashCode.
 De equals maak je op basis van de nummerplaat.
 Implementeer de interface Comparable op basis van nummerplaat.
 Zorg ervoor dat het mogelijk is om voertuigen in een OutputStream kunnen bewaard worden.
+
 Voorzien een Comparator op basis van merk en eentje op basis van aankoopprijs.
 Werk de comparators uit als inner classes.
 Maak voor elke comparator een static getter method om de comparator op te vragen.
@@ -115,6 +124,8 @@ Een personenwagen heeft een constructor met parameters om de fields te initialis
 Override de nodige methods.
 Een personenwagen heeft maximaal 8 zitplaatsen. Een ongeldige waarde leidt tot een 
 IllegalArgumentException.
+
+---------------------------
 Maat
 Creëer een enum Maat met waardes: centimeter, decimeter en meter.
 
@@ -139,7 +150,10 @@ VolumeException
 Plaats de class in be.vdab.util
 De class is afgeleid van Exception en heeft 4 constructors, net zoals Exception.
 Verder zijn er geen methods nodig.
+
+---------------------------
 Laadbaar
+
 Deze interface zit in de package be.vdab.util
 De interface definieert een getter en een setter voor laadvolume.
 
@@ -154,7 +168,7 @@ De class heeft een constructor om alle fields te initialiseren.
 Vrachtwagen
 
 Deze class in afgeleid van voertuig en implementeert Laadbaar.
-De class heeft 3 fields laadvolume, de int masimaalToegelatenMassa en de int aantalAssen.
+De class heeft 3 fields laadvolume, de int maximaalToegelatenMassa en de int aantalAssen.
 Voorzie de nodige getters en setter, override de nodige methods.
 Een vrachtwagen heeft maximum 3 zitplaatsen, anders ontstaat er een IllegalArgumentException.
 
@@ -180,4 +194,7 @@ Kopieer de eerste sorted set in een tweede en sorteer die op basis van aankooppr
 volgorde) en print de lijst uit.
 Kopieer de eerste sorted set in een derde en sorteer die op basis van merk. Print deze lijst uit en bewaar 
 de voertuigen in een bestand “wagenpark.ser”.
-Lees “wagenpark.ser” in een vierde sorted set en print deze uit. 
+Lees “wagenpark.ser” in een vierde sorted set en print deze uit.
+
+Merk je iets "raars" op bij de uitvoering van het hoofdprogramma? Verdwijnen er misschien een object? Hoe komt dit? Wat is de verklaring?
+
