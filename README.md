@@ -24,11 +24,9 @@ Implementeer de interface Comparable.
 ---------------------------
 DIV
 
-Maak een class DIV.
-Plaats de class in een package be.vdab.voertuigen.div.
-Deze class is een singleton, gebruik hiervoor volgende code:
-private static final DIV instance = new DIV();
-Maak een method getInstance() die de waarde van de instance terug geeft.
+Maak een enum DIV.
+Plaats de enum in een package be.vdab.voertuigen.div.
+Deze enum is een singleton, dit wil zeggen dat er slechts één instance is: INSTANCE;
 Maat een method getNummerplaat, die nummerplaat objecten terug geeft.
 Om de complexiteit rond de nummerplaat te beperken spreken we af dat:
 - een nummerplaat start met AAA gevolgd door 3 cijfers. Je start met 001.
