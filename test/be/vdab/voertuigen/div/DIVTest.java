@@ -16,9 +16,10 @@ public class DIVTest {
 
     @Test
     public void test_singleton() {
-        assertSame(DIV.getInstance(), DIV.getInstance());
+        assertSame(DIV.INSTANCE, DIV.INSTANCE);
     }
-
+/*
+ * Test is overbodig omdat het singleton nu een enum is.
     @Test
     public void test_niet_private_constructor() {
         Constructor<?>[] lijst = DIV.class.getDeclaredConstructors();
@@ -30,7 +31,11 @@ public class DIVTest {
             fail("there is an accessible constructor in DIV");
         }
     }
-
+*/
+    @Test
+    public void test_slechts_1_value(){
+        assertEquals(1, DIV.getValues().length);
+    }
     @Test
     public void test_niet_bestaan_setters() {
         Method[] lijst = DIV.class.getDeclaredMethods();
@@ -45,26 +50,26 @@ public class DIVTest {
 
     @Test
     public void test_singleton_not_null() {
-        assertNotNull(DIV.getInstance());
+        assertNotNull(DIV.INSTANCE);
     }
 
     @Test
     public void test_Nummerplaat() {
-        assertNotNull(DIV.getInstance().getNummerplaat());
+        assertNotNull(DIV.INSTANCE.getNummerplaat());
     }
 
     @Test
     public void test_Verschillende_Nummerplaten() {
-        assertNotSame(DIV.getInstance().getNummerplaat(), DIV.getInstance().getNummerplaat());
+        assertNotSame(DIV.INSTANCE.getNummerplaat(), DIV.INSTANCE.getNummerplaat());
     }
 
     @Test
     public void test_Rotatie_Verschillende_Nummerplaat_Objecten() {
-        Nummerplaat eerste = DIV.getInstance().getNummerplaat();
+        Nummerplaat eerste = DIV.INSTANCE.getNummerplaat();
         for (int teller = 1; teller <= 998; teller++) {
-            Nummerplaat plaat = DIV.getInstance().getNummerplaat();
+            Nummerplaat plaat = DIV.INSTANCE.getNummerplaat();
         }
-        Nummerplaat terugEerste = DIV.getInstance().getNummerplaat();
+        Nummerplaat terugEerste = DIV.INSTANCE.getNummerplaat();
         assertNotSame(eerste, terugEerste);
         assertEquals(eerste, terugEerste);
     }
@@ -72,10 +77,10 @@ public class DIVTest {
     @Test
     public void test_Rotatie_Verschillende_Nummerplaten_Waarden() {
         Set<Nummerplaat> platen=null;
-        synchronized (DIV.getInstance()) {
+        synchronized (DIV.INSTANCE) {
             platen = new HashSet<Nummerplaat>(999);
             for (int teller = 1; teller <=999; teller++) {
-                platen.add(DIV.getInstance().getNummerplaat());
+                platen.add(DIV.INSTANCE.getNummerplaat());
             }
         }
         assertEquals(platen.size(), 999);
