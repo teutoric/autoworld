@@ -18,23 +18,10 @@ public class DIVTest {
     public void test_singleton() {
         assertSame(DIV.INSTANCE, DIV.INSTANCE);
     }
-/*
- * Test is overbodig omdat het singleton nu een enum is.
-    @Test
-    public void test_niet_private_constructor() {
-        Constructor<?>[] lijst = DIV.class.getDeclaredConstructors();
-        boolean probleem = false;
-        for (Constructor<?> c : lijst) {
-            probleem &= c.isAccessible();
-        }
-        if (probleem) {
-            fail("there is an accessible constructor in DIV");
-        }
-    }
-*/
+
     @Test
     public void test_slechts_1_value(){
-        assertEquals(1, DIV.getValues().length);
+        assertEquals(1, DIV.values().length);
     }
     @Test
     public void test_niet_bestaan_setters() {
