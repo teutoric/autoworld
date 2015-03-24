@@ -44,7 +44,7 @@ De class heeft 3 integer fields: dag, maand, jaar.
 org ervoor deze fields slechts één maal een waarde kunnen krijgen (onmiddellijk bij de declaratie of in de constructor).
 De class aanvaardt alleen geldige datums tussen 01/01/1583 en 31/12/4099. 
 Een poging om een foute datum te creëren leidt tot een DatumExcepetion.
-De constructor aanvaart 3 integers (dag, maand, jaar).
+De constructor aanvaardt 3 integers (dag, maand, jaar).
 Voorzie de class van de nodige getters.
 Voorzie een toString (in het formaat dd/mm/jjjj) , een equals en een hashCode.
 Zorg ervoor dat datums in een OutputStream kunnen bewaard worden.
