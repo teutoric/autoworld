@@ -5,15 +5,40 @@
 
 package be.vdab.voertuigen.div;
 
+import java.io.Serializable;
+
 /**
  *
- * @author frank.roelants
+ * @author Dieter.Taillieu
  */
-public class Nummerplaat {
-    private String plaat;
+public class Nummerplaat implements Comparable<Nummerplaat>, Serializable {
+    private final String plaat;
 
-    public Nummerplaat(String plaat) {
+    //-------------------------------------------------------------------------
+
+    Nummerplaat(String plaat) {
         this.plaat = plaat;
     }
-    
+
+    //-------------------------------------------------------------------------
+
+    @Override
+    public int compareTo(Nummerplaat n) {return this.getPlaat().compareTo(n.getPlaat());}
+
+    @Override
+    public boolean equals(Object o) {
+    	if(o!=null && o instanceof Nummerplaat){
+    		Nummerplaat n = (Nummerplaat) o;
+        	return this.getPlaat().equals(n.getPlaat());
+    	}
+    	return false;
+    }
+
+    public String getPlaat() {return this.plaat;}
+
+    @Override
+    public int hashCode() {return this.plaat.hashCode();}
+
+    @Override
+    public String toString() {return this.getPlaat();}
 }
