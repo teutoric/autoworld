@@ -45,4 +45,9 @@ public class Personenwagen extends Voertuig {
 
 	public void setKleur(Color c) {this.kleur = c;}
 
+	@Override
+	public String toString() {
+		return String.format("%s %s %s %d %s %d", this.getNummerplaat(), this.getMerk(), this.getDatum(), this.getAankoopprijs(), this.getBestuurder(), this.getZitplaatsen());
+	}
+
 }
