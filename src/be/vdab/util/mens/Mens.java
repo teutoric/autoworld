@@ -1,9 +1,10 @@
 package be.vdab.util.mens;
 
+import java.io.Serializable;
 import java.util.EnumSet;
 import java.util.Set;
 
-public class Mens implements Comparable<Mens> {
+public class Mens implements Comparable<Mens>, Serializable {
 
 	private String naam;
 	private Set<Rijbewijs> rijbewijs = EnumSet.noneOf(Rijbewijs.class);
@@ -38,13 +39,9 @@ public class Mens implements Comparable<Mens> {
 
 	@Override
 	public boolean equals(Object o) {
-		if(o!=null && o instanceof Mens) {
+		if(o instanceof Mens) {
 			Mens m = (Mens) o;
-			if(this.getNaam().equals(m.getNaam())
-				&& this.getRijbewijs().length==m.getRijbewijs().length
-				&& this.getRijbewijs()[0].equals(m.getRijbewijs()[0])) {
-				return true;
-			}
+			if(this.toString().equals(m.toString())) return true;
 		}
 		return false;
 	}
