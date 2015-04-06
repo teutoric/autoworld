@@ -3,31 +3,42 @@ package be.vdab.voertuigen;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import be.vdab.util.Datum;
 import be.vdab.util.mens.Mens;
 import be.vdab.util.mens.MensException;
+import be.vdab.util.mens.Rijbewijs;
 import be.vdab.voertuigen.div.DIV;
 import be.vdab.voertuigen.div.Nummerplaat;
 
-public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Serializable {
+abstract public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Serializable {
+
+	// API: any subclass should override/implement the following abstract methods:
+
+	abstract protected int getMAX_ZITPLAATSEN();
+
+	abstract protected Rijbewijs[] getToegestaneRijbewijzen();
+
+	//
 
 	private int aankoopprijs;
 	private Mens bestuurder;
 	private Datum datumEersteIngebruikname;
-	//private Mens[] passagiers = new Mens[]{};
 	private TreeSet<Mens> passagiers = new TreeSet<Mens>();
 	private String merk;
 	private final Nummerplaat nummerplaat = DIV.INSTANCE.getNummerplaat();
-	private final int MAX_ZITPLAATSEN;
+	private final int zitplaatsen;
 
 	//
 
 	public Voertuig(String merk, Datum datumEersteIngebruikname, int aankoopprijs, int zitplaatsen, Mens bestuurder, Mens... rest) {
-		if(zitplaatsen<1) throw new IllegalArgumentException("Minstens 1 zitplaats is vereist.");
-		this.MAX_ZITPLAATSEN = zitplaatsen;
+		if(zitplaatsen<1) throw new IllegalArgumentException("Te weinig zitplaatsen: voorzie er minstens 1 voor de bestuurder");
+		if(zitplaatsen>getMAX_ZITPLAATSEN()) throw new IllegalArgumentException("Te veel zitplaatsen: maximale capaciteit is "+getMAX_ZITPLAATSEN());
+		this.zitplaatsen = zitplaatsen;
 
 		setBestuurder(bestuurder);
 		for(Mens m : rest) {addIngezetene(m);}
@@ -36,8 +47,6 @@ public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Ser
 		this.datumEersteIngebruikname = datumEersteIngebruikname;
 		setMerk(merk);
 	}
-
-	//
 
 	public static Comparator<Voertuig> getAankoopprijsComparator() {
 		return new Comparator<Voertuig>() {
@@ -61,7 +70,7 @@ public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Ser
 
 	public void addIngezetene(Mens m) {
 		if(!this.bestuurder.equals(m)) this.passagiers.add(m);
-		if(this.passagiers.size()==MAX_ZITPLAATSEN) throw new MensException("Er kan niemand meer bij, voertuig volzet.");
+		if(this.passagiers.size()==getMAX_ZITPLAATSEN()) throw new MensException("Er kan niemand meer bij, voertuig volzet.");
 	}
 
 	@Override
@@ -101,6 +110,8 @@ public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Ser
 
 	public Nummerplaat getNummerplaat() {return this.nummerplaat;}
 
+	public int getZitplaatsen() {return this.zitplaatsen;}
+
 	@Override
 	public int hashCode() {return getNummerplaat().hashCode();}
 
@@ -118,7 +129,7 @@ public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Ser
 			this.passagiers.add(this.bestuurder);
 			this.bestuurder = m;
 		} else {//									nieuwe bestuurder
-			if(getIngezetenen().size()==this.MAX_ZITPLAATSEN) throw new MensException("Geen plaats voor een nieuwe bestuurder.");
+			if(getIngezetenen().size()==getMAX_ZITPLAATSEN()) throw new MensException("Geen plaats voor een nieuwe bestuurder.");
 			this.passagiers.add(this.bestuurder);
 			this.bestuurder = m;
 		}
@@ -141,7 +152,14 @@ public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Ser
 	//
 
 	private boolean geldigeBestuurder(Mens m) {
-		return m.getRijbewijs().length>0;
+		List<Rijbewijs> geldigeRijbewijzen = Arrays.asList(getToegestaneRijbewijzen());
+		for(Object o : m.getRijbewijs()) {
+			Rijbewijs r = (Rijbewijs) o;
+			if(geldigeRijbewijzen.contains(r)) return true;
+		}
+		return false;
+
+		//return m.getRijbewijs().length>0;
 	}
 
 }
