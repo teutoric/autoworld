@@ -1,4 +1,9 @@
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.TreeSet;
 
 import be.vdab.util.Datum;
@@ -34,9 +39,21 @@ public class Main {
 		setA.add(new Vrachtwagen("Daf", new Datum(3,12,1978), 25300, 3, new Volume(18,4,6,Maat.meter), 5000, 4, m4) );
 		setA.add(new Vrachtwagen("Lada", new Datum(15,6,1972), 27600, 2, new Volume(25,4,6,Maat.meter), 15000, 6, m6) );
 
+		System.out.println("De originele set:");
 		for(Voertuig v : setA) {
 			System.out.println(v.toString());
 		}
+
+		TreeSet<Voertuig> setB = (TreeSet<Voertuig>) setA.clone();
+		Comparator<Voertuig> cmpB = Voertuig.getAankoopprijsComparator();
+		List<Voertuig> lstB = new ArrayList<Voertuig>(setB);
+		Collections.sort(lstB, Collections.reverseOrder(cmpB));
+
+		System.out.println("\nDe geclonede en volgens aankoopprijs geordende tweede:");
+		for(Voertuig v : lstB) {
+			System.out.println(v.toString());
+		}
+
 	}
 
 }
