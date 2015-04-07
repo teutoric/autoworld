@@ -1,4 +1,9 @@
 import java.awt.Color;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -44,6 +49,8 @@ public class Main {
 			System.out.println(v.toString());
 		}
 
+		//
+
 		TreeSet<Voertuig> setB = (TreeSet<Voertuig>) setA.clone();
 		Comparator<Voertuig> cmpB = Voertuig.getAankoopprijsComparator();
 		List<Voertuig> lstB = new ArrayList<Voertuig>(setB);
@@ -51,6 +58,64 @@ public class Main {
 
 		System.out.println("\nDe geclonede en volgens aankoopprijs geordende tweede:");
 		for(Voertuig v : lstB) {
+			System.out.println(v.toString());
+		}
+
+		//
+
+		TreeSet<Voertuig> setC = (TreeSet<Voertuig>) setA.clone();
+		Comparator<Voertuig> cmpC = Voertuig.getMerkComparator();
+		List<Voertuig> lstC = new ArrayList<Voertuig>(setC);
+		Collections.sort(lstC, cmpC);
+
+		System.out.println("\nDe geclonede en volgens merk geordende derde:");
+		for(Voertuig v : lstC) {
+			System.out.println(v.toString());
+		}
+
+		//
+
+		//Voertuig[] arrD = setA.toArray(new Voertuig[setA.size()]);
+
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		try {
+			fos = new FileOutputStream("wagenpark.ser");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(setA);
+		} catch(IOException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (oos!=null) {
+				try {
+					oos.close();
+				} catch(IOException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+
+		TreeSet<Voertuig> setD = new TreeSet<Voertuig>();
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream("wagenpark.ser");
+			ois = new ObjectInputStream(fis);
+			setD = (TreeSet<Voertuig>) ois.readObject();
+		} catch(IOException | ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (ois!=null) {
+				try {
+					ois.close();
+				} catch(IOException e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+
+		System.out.println("\nDe geserialiseerde en als vierde ingelezene:");
+		for(Voertuig v : (TreeSet<Voertuig>) setD) {
 			System.out.println(v.toString());
 		}
 
