@@ -9,7 +9,7 @@ public enum DIV {
 	public Nummerplaat getNummerplaat() {
 		StringBuilder s = new StringBuilder("AAA");
 		for(int i=2; i>=0; i--) {
-			char c = (char) ('A'+alpha%26);
+			char c = (char) ('A' + alpha % 26);
 			s.setCharAt(i, c);
 			alpha = alpha/26;
 		}

@@ -6,6 +6,7 @@ import be.vdab.util.Laadbaar;
 import be.vdab.util.Volume;
 
 public class Boekentas implements Laadbaar, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private String kleur;
 	private Volume laadvolume;
@@ -22,6 +23,8 @@ public class Boekentas implements Laadbaar, Serializable {
 
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
+		if(o == this) return true;
 		if(o instanceof Boekentas) {
 			Boekentas b = (Boekentas) o;
 			if(this.toString().equals(b.toString())) return true;

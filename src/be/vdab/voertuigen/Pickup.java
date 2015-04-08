@@ -8,9 +8,12 @@ import be.vdab.util.Volume;
 import be.vdab.util.mens.Mens;
 
 public class Pickup extends Personenwagen implements Laadbaar {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Volume volume;
-
+	
+	//
+	
 	public Pickup(String merk,
 			Datum datumEersteIngebruikname,
 			int aankoopprijs,

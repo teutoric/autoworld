@@ -7,6 +7,7 @@ import be.vdab.util.mens.Mens;
 import be.vdab.util.mens.Rijbewijs;
 
 public class Personenwagen extends Voertuig {
+	private static final long serialVersionUID = 1L;
 
 	private static final int MAX_ZITPLAATSEN = 8;
 
@@ -14,12 +15,6 @@ public class Personenwagen extends Voertuig {
 
 	//
 
-/*	public Personenwagen(
-			String merk, Datum datumEersteIngebruikname, int aankoopprijs,
-			int zitplaatsen, Mens bestuurder, Mens[] rest) {
-		super(merk, datumEersteIngebruikname, aankoopprijs, zitplaatsen, bestuurder, rest);
-	}
-*/
 	public Personenwagen(
 			String merk, Datum datumEersteIngebruikname, int aankoopprijs,
 			int zitplaatsen, Color kleur, Mens bestuurder, Mens... rest) {

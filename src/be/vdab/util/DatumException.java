@@ -1,7 +1,7 @@
 package be.vdab.util;
 
-@SuppressWarnings("serial")
 public class DatumException extends Exception {
+	private static final long serialVersionUID = 1L;
 
 	public DatumException() {}
 

@@ -12,22 +12,26 @@ import java.io.Serializable;
  * @author Dieter.Taillieu
  */
 public class Nummerplaat implements Comparable<Nummerplaat>, Serializable {
+    private static final long serialVersionUID = 1L;
+	
     private final String plaat;
 
-    //-------------------------------------------------------------------------
+    //
 
     Nummerplaat(String plaat) {
         this.plaat = plaat;
     }
 
-    //-------------------------------------------------------------------------
+    //
 
     @Override
     public int compareTo(Nummerplaat n) {return this.getPlaat().compareTo(n.getPlaat());}
 
     @Override
     public boolean equals(Object o) {
-    	if(o!=null && o instanceof Nummerplaat){
+    	if(o == null) return false;
+    	if(o == this) return true;
+    	if(o instanceof Nummerplaat) {
     		Nummerplaat n = (Nummerplaat) o;
         	return this.getPlaat().equals(n.getPlaat());
     	}

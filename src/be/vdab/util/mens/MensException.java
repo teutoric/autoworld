@@ -1,7 +1,7 @@
 package be.vdab.util.mens;
 
-@SuppressWarnings("serial")
 public class MensException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
 
 	public MensException() {super();}
 

@@ -5,7 +5,8 @@ import java.util.EnumSet;
 import java.util.Set;
 
 public class Mens implements Comparable<Mens>, Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private String naam;
 	private Set<Rijbewijs> rijbewijs = EnumSet.noneOf(Rijbewijs.class);
 
@@ -19,26 +20,21 @@ public class Mens implements Comparable<Mens>, Serializable {
 		this(naam);
 		this.rijbewijs = EnumSet.of(r1, rest);
 	}
-/*
-	public Mens(String naam, Rijbewijs r1) {}
 
-	public Mens(String naam, Rijbewijs r1, Rijbewijs r2) {}
-
-	public Mens(String naam, Rijbewijs r1, Rijbewijs r2, Rijbewijs r3) {}
-
-	public Mens(String naam, Rijbewijs r1, Rijbewijs r2, Rijbewijs r3, Rijbewijs r4) {}
-*/
 	//
 
 	@Override
 	public int compareTo(Mens m) {
-		int result = this.getNaam().compareTo(m.getNaam());
-		if(result==0) result = this.getRijbewijs().length - m.getRijbewijs().length;
-		return result;
+		return this.toString().compareTo(m.toString());
+		//int result = this.getNaam().compareTo(m.getNaam());
+		//if(result==0) result = this.getRijbewijs().length - m.getRijbewijs().length;
+		//return result;
 	}
 
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
+		if(o == this) return true;
 		if(o instanceof Mens) {
 			Mens m = (Mens) o;
 			if(this.toString().equals(m.toString())) return true;

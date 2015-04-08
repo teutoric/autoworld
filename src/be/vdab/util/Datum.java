@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public final class Datum implements Comparable<Datum>, Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	private final int dag;
 	private final int maand;
 	private final int jaar;
@@ -42,17 +43,19 @@ public final class Datum implements Comparable<Datum>, Serializable {
 
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
+		if(o == this) return true;
 		if(o instanceof Datum) {
 			Datum d = (Datum) o;
-			if(this.getDag()==d.getDag() && this.getMaand()==d.getMaand() && this.getJaar()==d.getJaar()) {
-				return true;
-			}
+			if(this.getDag()==d.getDag() && this.getMaand()==d.getMaand() && this.getJaar()==d.getJaar()) return true;
 		}
 		return false;
 	}
 
 	public int getDag() {return this.dag;}
+	
 	public int getJaar() {return this.jaar;}
+	
 	public int getMaand() {return this.maand;}
 
 	@Override

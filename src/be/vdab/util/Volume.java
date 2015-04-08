@@ -2,12 +2,13 @@ package be.vdab.util;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
+//import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 //@SuppressWarnings("rawtypes")
 public class Volume implements Comparable<Volume>, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private final int breedte;
 	private final int diepte;
@@ -36,7 +37,7 @@ public class Volume implements Comparable<Volume>, Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if(!(o instanceof Volume)) return false;
+		if(o == null) return false;
 		if(o == this) return true;
 		Volume v = (Volume) o;
 		return new EqualsBuilder().

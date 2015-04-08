@@ -9,11 +9,14 @@ import be.vdab.util.mens.Mens;
 import be.vdab.util.mens.Rijbewijs;
 
 public class Vrachtwagen extends Voertuig implements Laadbaar {
-
+	private static final long serialVersionUID = 1L;
+	
 	private int aantalAssen;
 	private Volume laadvolume;
 	private int maximaalToegelatenMassa;
 
+	//
+	
 	public Vrachtwagen(String merk, Datum datum, int aankoopprijs, int zitplaatsen,
 			Volume volume, int maxToegelatenMassa, int assen, Mens bestuurder, Mens... rest) {
 		super(merk, datum, aankoopprijs, zitplaatsen, bestuurder, rest);
@@ -47,8 +50,7 @@ public class Vrachtwagen extends Voertuig implements Laadbaar {
 
 	public void setLaadvolume(Volume v) {
 		try {
-			Validate.notNull(v);
-			//Validate.isTrue(v.getVolume() <= getMaximaalToegelatenMassa());
+			Validate.notNull(v, "Laadvolume kan niet '%s' zijn", "null");
 			this.laadvolume = v;
 		} catch(Exception e) {
 			throw new IllegalArgumentException(e);

@@ -5,10 +5,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
+//import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import be.vdab.util.Datum;
@@ -23,8 +24,10 @@ import be.vdab.voertuigen.Pickup;
 import be.vdab.voertuigen.Voertuig;
 import be.vdab.voertuigen.Vrachtwagen;
 
-/*
- * VDAB autoworld Main
+/**
+ * VDAB oefening 'autoworld': Main
+ * 
+ * @author dieter.taillieu
  */
 public class Main {
 
@@ -36,7 +39,7 @@ public class Main {
 		Mens m5 = new Mens("Pollux", Rijbewijs.C);
 		Mens m6 = new Mens("Castor", Rijbewijs.CE);
 
-		TreeSet<Voertuig> setA = new TreeSet<Voertuig>();
+		Set<Voertuig> setA = new TreeSet<Voertuig>();
 		setA.add(new Personenwagen("Lada", new Datum(1,1,2015), 8300, 5, Color.gray, m1) );
 		setA.add(new Personenwagen("Triumph", new Datum(13,2,1954), 5300, 3, Color.red, m3) );
 		setA.add(new Pickup("Dodge", new Datum(13,9,1983), 18700, 3, Color.black, new Volume(4,3,1,Maat.meter), m2) );
@@ -50,8 +53,8 @@ public class Main {
 		}
 
 		//
-
-		TreeSet<Voertuig> setB = (TreeSet<Voertuig>) setA.clone();
+		
+		Set<Voertuig> setB = new TreeSet<Voertuig>(setA);
 		Comparator<Voertuig> cmpB = Voertuig.getAankoopprijsComparator();
 		List<Voertuig> lstB = new ArrayList<Voertuig>(setB);
 		Collections.sort(lstB, Collections.reverseOrder(cmpB));
@@ -63,7 +66,7 @@ public class Main {
 
 		//
 
-		TreeSet<Voertuig> setC = (TreeSet<Voertuig>) setA.clone();
+		Set<Voertuig> setC = new TreeSet<Voertuig>(setA);
 		Comparator<Voertuig> cmpC = Voertuig.getMerkComparator();
 		List<Voertuig> lstC = new ArrayList<Voertuig>(setC);
 		Collections.sort(lstC, cmpC);
@@ -74,8 +77,6 @@ public class Main {
 		}
 
 		//
-
-		//Voertuig[] arrD = setA.toArray(new Voertuig[setA.size()]);
 
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
@@ -95,12 +96,20 @@ public class Main {
 			}
 		}
 
-		TreeSet<Voertuig> setD = new TreeSet<Voertuig>();
+		Set<Voertuig> setD = new TreeSet<Voertuig>();
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
 			fis = new FileInputStream("wagenpark.ser");
 			ois = new ObjectInputStream(fis);
+			/*
+			 * TODO:
+			 * 	Eclipse warns of 'Type safety: unchecked cast from Object to TreeSet<Voertuig>' ...
+			 * 	Adding the annotation '@SuppressWarnings("unchecked")' has the side-effect 
+			 * 		that setD can no longer be resolved to a type.
+			 * 	StackOverflow advice: learn to live with the 'unchecked cast' warning!
+			 */
+			//@SuppressWarnings("unchecked")
 			setD = (TreeSet<Voertuig>) ois.readObject();
 		} catch(IOException | ClassNotFoundException e) {
 			System.out.println(e.getMessage());

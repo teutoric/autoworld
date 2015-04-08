@@ -3,7 +3,6 @@ package be.vdab.voertuigen;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -16,11 +15,11 @@ import be.vdab.voertuigen.div.DIV;
 import be.vdab.voertuigen.div.Nummerplaat;
 
 abstract public class Voertuig implements Comparable<Voertuig>, Comparator<Voertuig>, Serializable {
-
+	private static final long serialVersionUID = 1L;
+	
 	// API: any subclass should override/implement the following abstract methods:
 
 	abstract protected int getMAX_ZITPLAATSEN();
-
 	abstract protected Rijbewijs[] getToegestaneRijbewijzen();
 
 	//
@@ -85,6 +84,8 @@ abstract public class Voertuig implements Comparable<Voertuig>, Comparator<Voert
 
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
+		if(o == this) return true;
 		if(o instanceof Voertuig) {
 			Voertuig v = (Voertuig) o;
 			return this.getNummerplaat().equals(v.getNummerplaat());
@@ -98,10 +99,10 @@ abstract public class Voertuig implements Comparable<Voertuig>, Comparator<Voert
 
 	public Datum getDatumEersteIngebruikname() {return this.datumEersteIngebruikname;}
 
-	public TreeSet<Mens> getIngezeteneExclusiefBestuurder() {return this.passagiers;}
+	public Set<Mens> getIngezeteneExclusiefBestuurder() {return this.passagiers;}
 
-	public TreeSet<Mens> getIngezetenen() {
-		TreeSet<Mens> allen = new TreeSet<Mens>(this.passagiers);
+	public Set<Mens> getIngezetenen() {
+		Set<Mens> allen = new TreeSet<Mens>(this.passagiers);
 		allen.add(this.bestuurder);
 		return allen;
 	}
